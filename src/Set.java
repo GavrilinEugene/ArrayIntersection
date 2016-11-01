@@ -4,25 +4,25 @@ import java.util.Arrays;
 public class Set {
     public static final double defaultEpsilon = 0.001;
 
-    public static double[] intersection(double[] firstSet, double[] secondSet, double epsilon){
+    public static double[] intersection(double[] first, double[] second, double epsilon){
 
-        double[] intersectionSet = new double[firstSet.length];
+        double[] intersection = new double[first.length];
         int intersectionSetLength = 0;
 
-        for(int firstSetIndex = 0; firstSetIndex < firstSet.length; firstSetIndex ++){
-            for(int secondSetIndex = 0; secondSetIndex < secondSet.length; secondSetIndex++){
-                if(checkEqualityWithEpsilon(firstSet[firstSetIndex],secondSet[secondSetIndex], epsilon))
-                    intersectionSet[intersectionSetLength ++] = firstSet[firstSetIndex];
+        for(int firstSetIndex = 0; firstSetIndex < first.length; firstSetIndex ++){
+            for(int secondSetIndex = 0; secondSetIndex < second.length; secondSetIndex++){
+                if(isEqual(first[firstSetIndex],second[secondSetIndex], epsilon))
+                    intersection[intersectionSetLength ++] = first[firstSetIndex];
             }
         }
-        return cutSetByLength(intersectionSet, intersectionSetLength);
+        return trim(intersection, intersectionSetLength);
     }
 
-    private static boolean checkEqualityWithEpsilon(double firstElement, double secondElement, double epsilon){
+    private static boolean isEqual(double firstElement, double secondElement, double epsilon){
         return Math.abs(firstElement - secondElement) < epsilon;
     }
 
-    private static double[] cutSetByLength(double[] set, int length){
+    private static double[] trim(double[] set, int length){
         double[] ret = new double[length];
         System.arraycopy(set, 0, ret, 0, length);
         return ret;
